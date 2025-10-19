@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Minibiblioteca Digital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Minibiblioteca Digital</h1>
+            <p>Tu colección de libros siempre disponible</p>
+        </header>
+
+        <!-- Menú Principal -->
+        <div id="menu" class="content active">
+            <div class="nav-buttons">
+                <button class="btn btn-primary" onclick="showSection('inicio')">🏠 Inicio</button>
+                <button class="btn btn-secondary" onclick="showSection('categorias')">📂 Categorías</button>
+                <button class="btn btn-success" onclick="showSection('autores')">✍️ Autores</button>
+                <button class="btn btn-warning" onclick="showSection('buscar')">🔍 Buscar</button>
+                <button class="btn btn-primary" onclick="showSection('favoritos')">⭐ Favoritos</button>
+                <button class="btn btn-secondary" onclick="showSection('nuevos')">🆕 Nuevos Libros</button>
+                <button class="btn btn-success" onclick="showSection('biblioteca')">📖 Biblioteca Completa</button>
+                <button class="btn btn-warning" onclick="showSection('ayuda')">❓ Ayuda</button>
+            </div>
+        </div>
+
+        <!-- Inicio -->
+        <div id="inicio" class="content">
+            <button class="btn btn-primary back-button" onclick="showSection('menu')">⬅️ Volver al Menú</button>
+            <h2>Bienvenido a tu Biblioteca Digital</h2>
+            <p style="margin: 20px 0; font-size: 1.1em; color: #666;">Explora nuestra colección de libros cuidadosamente seleccionados para ti.</p>
+            <div class="book-grid" id="destacados"></div>
+        </div>
+
+        <!-- Categorías -->
+        <div id="categorias" class="content">
+            <button class="btn btn-primary back-button" onclick="showSection('menu')">⬅️ Volver al Menú</button>
+            <h2>Categorías</h2>
+            <div class="category-list" id="categoryList"></div>
+        </div>
+
+        <!-- Autores -->
+        <div id="autores" class="content">
+            <button class="btn btn-primary back-button" onclick="showSection('menu')">⬅️ Volver al Menú</button>
+            <h2>Autores</h2>
+            <div class="author-list" id="authorList"></div>
+        </div>
+
+        <!-- Buscar -->
+        <div id="buscar" class="content">
+            <button class="btn btn-primary back-button" onclick="showSection('menu')">⬅️ Volver al Menú</button>
+            <h2>Buscar Libro</h2>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Escribe el título, autor o género...">
+                <button class="btn btn-primary" onclick="searchBooks()">🔍 Buscar</button>
+            </div>
+            <div class="book-grid" id="searchResults"></div>
+        </div>
+
+        <!-- Favoritos -->
+        <div id="favoritos" class="content">
+            <button class="btn btn-primary back-button" onclick="showSection('menu')">⬅️ Volver al Menú</button>
+            <h2>Mis Favoritos</h2>
+            <div class="book-grid" id="favoritosGrid"></div>
+            <div id="emptyFavorites" class="favorites-empty" style="display: none;">
+                <h2>⭐ Aún no tienes favoritos</h2>
+                <p>Explora la biblioteca y marca tus libros preferidos</p>
+            </div>
+        </div>
+
+        <!-- Nuevos Libros -->
+        <div id="nuevos" class="content">
+            <button class="btn btn-primary back-button" onclick="showSection('menu')">⬅️ Volver al Menú</button>
+            <h2>Nuevos Libros</h2>
+            <div class="book-grid" id="nuevosGrid"></div>
+        </div>
+
+        <!-- Biblioteca Completa -->
+        <div id="biblioteca" class="content">
+            <button class="btn btn-primary back-button" onclick="showSection('menu')">⬅️ Volver al Menú</button>
+            <h2>Biblioteca Completa</h2>
+            <div class="book-grid" id="bibliotecaGrid"></div>
+            <div class="pagination" id="pagination"></div>
+        </div>
+
+        <!-- Ayuda -->
+        <div id="ayuda" class="content">
+            <button class="btn btn-primary back-button" onclick="showSection('menu')">⬅️ Volver al Menú</button>
+            <h2>Ayuda e Instrucciones</h2>
+            
+            <div class="help-section">
+                <h3>🏠 Navegación</h3>
+                <p>Usa los botones del menú principal para explorar diferentes secciones de la biblioteca.</p>
+            </div>
+
+            <div class="help-section">
+                <h3>🔍 Búsqueda</h3>
+                <p>Puedes buscar libros por título, autor o género. La búsqueda es inteligente y encuentra coincidencias parciales.</p>
+            </div>
+
+            <div class="help-section">
+                <h3>⭐ Favoritos</h3>
+                <p>Haz clic en el botón "Agregar a Favoritos" de cualquier libro para guardarlo en tu lista personal.</p>
+            </div>
+
+            <div class="help-section">
+                <h3>📖 Leer Libros</h3>
+                <p>Haz clic en "Leer Online" para abrir el libro en el visor. También puedes ver más información haciendo clic en "Ver Más".</p>
+            </div>
+
+            <div class="help-section">
+                <h3>📧 Contacto</h3>
+                <p>Para sugerencias o reportar problemas: biblioteca@digital.com</p>
+            </div>
+
+            <div class="help-section">
+                <h3>ℹ️ Créditos</h3>
+                <p>Minibiblioteca Digital v1.0 - Desarrollada con ❤️ para los amantes de la lectura</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para detalles del libro -->
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">×</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+  <!-- Sección de contacto -->
+        <div class="footer-section contact">
+            <h4>Contacto</h4>
+
+    <div class="footer-bottom">
+        <p>© 2025 Minibiblioteca Digital — Desarrollada con ❤️ para fomentar la lectura</p>
+        <p>Aracely Montalvo Leon👨‍💻</p>
+        <p>Erlinda Flores Vargas🙋‍♀️🕐</p>
+        <p>Jose Manuel Galarza Ventura👌</p>
+        <p>Nancy Vela Yampara😎✅</p>
+    </div>
+</footer>
